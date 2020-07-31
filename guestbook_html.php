@@ -5,6 +5,7 @@ $comentario = '';
 $nombre = '';
 $fecha = '';
 $registro = '';
+$mensaje = '';
 	//comprobamos que exise Enviar cuando cargamos la página por primera vez mediante POST
 if(isset($_POST['enviar'])){
 
@@ -13,16 +14,28 @@ if(isset($_POST['enviar'])){
 	//si existe, leemos y evaluamos comentario
 	$comentario = trim($_POST['comentario']);
 	$fecha = date("j-n-y");
-	$registro = "$nombre escribió el $fecha:<br>$comentario<br><br>";
-	//echo $nombre;
-	//echo $comentario;
-	//echo $fecha;
-	//echo $registro;
+	//validar try catch datos
+	try{
+		if($nombre == ''){
+			throw new Exception("Nombre obligatorio", 1);
+		}
+		if($comentario == ''){
+			throw new Exception("Comentario obligatorio", 1);
+		}
+		$mensaje = '';
+		$registro = "$nombre escribió el $fecha:<br>$comentario<br><br>";
 
-	//abrir fichero
-	$fichero = fopen('files/guestbook.txt', 'a+');
-	//escribir en fichero
-	fwrite($fichero, $registro);
+		//abrir fichero
+		$fichero = fopen('files/guestbook.txt', 'a+');
+		//escribir en fichero
+		fwrite($fichero, $registro);
+	
+	} catch(Exception $e){
+		//tratamiento de errores
+		$mensaje = $e->getMessage();
+
+	}
+	
 
 }
 
@@ -43,6 +56,8 @@ if(isset($_POST['enviar'])){
 <body>
 	<center><h3>Escritura en ficheros</h3></center>
 	<div>
+		<!--zona de mensajes-->
+		<span><?=$mensaje?></span>
 		<form method="post" action="#">
 			<input type="text" name="nombre" placeholder="nombre" required /><br><br>
 			<textarea name="comentario"></textarea><br><br>
