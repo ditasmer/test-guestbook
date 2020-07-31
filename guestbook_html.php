@@ -4,6 +4,7 @@
 $comentario = '';
 $nombre = '';
 $fecha = '';
+$registro = '';
 	//comprobamos que exise Enviar cuando cargamos la página por primera vez mediante POST
 if(isset($_POST['enviar'])){
 
@@ -12,9 +13,15 @@ if(isset($_POST['enviar'])){
 	//si existe, leemos y evaluamos comentario
 	$comentario = trim($_POST['comentario']);
 	$fecha = date("j-n-y");
-	echo $nombre;
-	echo $comentario;
-	echo $fecha;
+	$registro = "$nombre escribió el $fecha:<br>$comentario";
+	//echo $nombre;
+	//echo $comentario;
+	//echo $fecha;
+	echo $registro;
+
+	//escribir en fichero
+	file_put_contents('files/guestbook.txt', $registro);
+
 }
 
 ?>
