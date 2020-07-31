@@ -13,14 +13,16 @@ if(isset($_POST['enviar'])){
 	//si existe, leemos y evaluamos comentario
 	$comentario = trim($_POST['comentario']);
 	$fecha = date("j-n-y");
-	$registro = "$nombre escribió el $fecha:<br>$comentario";
+	$registro = "$nombre escribió el $fecha:<br>$comentario<br><br>";
 	//echo $nombre;
 	//echo $comentario;
 	//echo $fecha;
 	//echo $registro;
 
+	//abrir fichero
+	$fichero = fopen('files/guestbook.txt', 'a+');
 	//escribir en fichero
-	file_put_contents('files/guestbook.txt', $registro);
+	fwrite($fichero, $registro);
 
 }
 
