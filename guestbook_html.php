@@ -1,5 +1,22 @@
 <?php
-	
+
+//ini vars
+$comentario = '';
+$nombre = '';
+$fecha = '';
+	//comprobamos que exise Enviar cuando cargamos la página por primera vez mediante POST
+if(isset($_POST['enviar'])){
+
+	//si existe, leemos y evaluamos nombre
+	$nombre = trim($_POST['nombre']);
+	//si existe, leemos y evaluamos comentario
+	$comentario = trim($_POST['comentario']);
+	$fecha = date("j-n-y");
+	echo $nombre;
+	echo $comentario;
+	echo $fecha;
+}
+
 ?>
 <html>
 <head>
@@ -19,7 +36,7 @@
 	<div>
 		<form method="post" action="#">
 			<input type="text" name="nombre" placeholder="nombre" required /><br><br>
-			<textarea name="comentarios"></textarea><br><br>
+			<textarea name="comentario"></textarea><br><br>
 			
 			<input type="submit" name="enviar" value="Enviar" />
 		</form>
