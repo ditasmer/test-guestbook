@@ -29,6 +29,10 @@ if(isset($_POST['enviar'])){
 		$fichero = fopen('files/guestbook.txt', 'a+');
 		//escribir en fichero
 		fwrite($fichero, $registro);
+
+		//limpiar inputs
+		$nombre = '';
+		$comentario = '';
 	
 	} catch(Exception $e){
 		//tratamiento de errores
@@ -59,8 +63,8 @@ if(isset($_POST['enviar'])){
 		<!--zona de mensajes-->
 		<span><?=$mensaje?></span>
 		<form method="post" action="#">
-			<input type="text" name="nombre" placeholder="nombre" required /><br><br>
-			<textarea name="comentario"></textarea><br><br>
+			<input type="text" name="nombre" placeholder="nombre" required value='<?=$nombre?>' /><br><br>
+			<textarea name="comentario"><?=$comentario;?></textarea><br><br>
 			
 			<input type="submit" name="enviar" value="Enviar" />
 		</form>
