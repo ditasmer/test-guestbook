@@ -17,7 +17,7 @@ if(isset($_POST['enviar'])){
 	//echo $nombre;
 	//echo $comentario;
 	//echo $fecha;
-	echo $registro;
+	//echo $registro;
 
 	//escribir en fichero
 	file_put_contents('files/guestbook.txt', $registro);
@@ -48,6 +48,7 @@ if(isset($_POST['enviar'])){
 			<input type="submit" name="enviar" value="Enviar" />
 		</form>
 		<h3>Comentarios: </h3>
+		<?=$registro;?>
 	</div>	
 </body>
 </html>
